@@ -43,5 +43,33 @@ public class Students(){
 	}
 }
 //インターフェイス
+//インターフェイスは定数とメソッドのみが定義できる。
+//以下はimplementsを使用した例である。
+interface Cale{
+	int NUM1=1;
+	int NUM1=2;
+	void calc();
+}
+
+class Add implements Calc{
+	public void calc(){System.out.println(NUM1+NUM2);
+	}
+}
+
+class Sub implements Cale{
+	public void calc(){System.out.println(NUM1-NUM2);
+	}
+}
+
+public class Main{
+	public static void main(String[] args){
+		Add add = new Add();
+		add.calc();
+		Sub sub = new Sub();
+		sub.calc();
+	}
+}
+
+
 //パッケージ
 
