@@ -1,7 +1,8 @@
 vimコマンド
 
+随時更新していく
 ◆便利
-文字を消去してInsert Modeに移る：select ⇒c
+文字を消去してInsert Modeに移る：select ⇒c(change)
 一単語消去する：v(ビジュアルモード) + e(単語の終端)+ x(カーソル位置の文字を削除)
 右の{char}の真上に移動する：f + {char}
 右の{char}の直前の文字(character)移動する：t + {char}
@@ -16,13 +17,13 @@ vimコマンド
 例２)"asdfg-asdfg"をMOJIに変換する
 処理）char moji= "asdfg-asdfg"
 操作）"asdfg-asdfg"の先頭の"にカーソルを合わせる
-　　　c + f + "(変換したい文字) + MOJI
+　　　c(change) + f + "(変換したい文字) + MOJI
 結果）char moji= MOJI
 (応用)
 例１)asdfg-asdfgを消去する
 処理）char moji= "asdfg-asdfg"
 操作）""内のどこかにカーソルを合わせる
-　　　c(消去する) + i(inner) + "(消去したい文字の次の文字)
+　　　c(change消去する) + i(inner) + "(消去したい文字の次の文字)
 結果）char moji= ""
 
 ◆繰り返し
@@ -44,7 +45,6 @@ Back space:dh
 Delete:dl
 ２行上削除：dk
 
-
 ◆移動系
 行頭へ：0
 行末へ：$
@@ -60,10 +60,14 @@ Delete:dl
 ファイルの末尾に移動：G
 
 
-
+◆検索・置換
+置換mode:insert
 前方検索：/pattrn
 後方検索：?pattrn
 カーソル位置の単語を検索して移動する：*n
+指定の行の指定の文字ないし文字列を置換する：<開始行番号>,<終了行番号>s/<置換前>/置換後/g
+例）122行目のTest2をTest3に置換したい場合
+:122s/2/3/g
 
 ◆ファイル操作
 直前の操作を取り消し：u
@@ -77,7 +81,32 @@ Delete:dl
 行番号表示：:set number
 
 
-
-
-
-
+◆vimrcでの設定項目
+set number
+set cursorline
+set guioptions-=m
+syntax on
+set autoindent
+colorscheme blue
+" 挿入モードでバックスペースで削除できるようにする
+set backspace=indent,eol,start
+" 検索結果がファイル末尾まで進んだら、ファイルっ先頭から再び検索
+set wrapscan
+" 挿入モード中にカーソルを移動するマッピング
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+" インサートモードでjjを押すとEscにマップ
+inoremap jj <Esc>
+" バックアップファイルを作成しない
+set nobackup
+set noswapfile
+" カーソルを行末の一時文超えるようにせてい
+set virtualedit=onemore
+" ビープ音を消す
+set belloff=all
+" マッチ件数を表示
+set shortmess-=S
+" クリップモードとヤンク
+set clipboard+=unnamedplus,unnamed
