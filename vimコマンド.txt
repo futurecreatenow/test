@@ -1,49 +1,47 @@
-vimコマンド
-
-随時更新していく
 ◆便利
-文字を消去してInsert Modeに移る：select ⇒c(change)
-一単語消去する：v(ビジュアルモード) + e(単語の終端)+ x(カーソル位置の文字を削除)
-右の{char}の真上に移動する：f + {char}
-右の{char}の直前の文字(character)移動する：t + {char}
-→ビジュアルモード(v)の状態でt + {char}とすると選択した範囲まで確認することができる
-
-例１)asdfg-asdfgを消去する
-処理)char moji= "asdfg-asdfg"
-操作）asdfg-asdfgの先頭のaにカーソルを合わせる
-　　　d(消去する) + t(直前の文字に移動する) + "(消去したい文字の次の文字)
-結果）char moji= ""
-
-例２)"asdfg-asdfg"をMOJIに変換する
-処理）char moji= "asdfg-asdfg"
-操作）"asdfg-asdfg"の先頭の"にカーソルを合わせる
-　　　c(change) + f + "(変換したい文字) + MOJI
-結果）char moji= MOJI
-(応用)
-例１)asdfg-asdfgを消去する
-処理）char moji= "asdfg-asdfg"
-操作）""内のどこかにカーソルを合わせる
-　　　c(change消去する) + i(inner) + "(消去したい文字の次の文字)
-結果）char moji= ""
+""を消去してInsert Modeに移る：ci"
+単語を消去してInsert Modeに移る：ciw
+右の{char}の真上に移動する：f{char}
+右の{char}の直前の文字(character)移動する：t {char}
 
 ◆繰り返し
 直前のコマンドを再実行：.(ドット)
+n行分削除:ndd
+n行分上へ：nk
+n個分順方向の文字の上に移動：nf{char}
+;:順方向に繰り返し検索
+::逆方向に繰り返し検索
+abcdefg abcdefg abcdefg
+aから三つ目のeに行く場合→→fe ; ;
 
 ◆選択系とコピー、ペースト系
+カーソル行の末尾に改行：o
+カーソル行の先頭に改行：O
 コピーしたい場合:y
-空白行の追加：空白行を入れたい行の上の先頭にカーソルを移動＋p
 カットしたい場合:d
-行単位選択：1)Shift + v
-	    2)コピーしたい場合：y
-	    3)カットしたい場合：d
-行コピー:yy
+行単位選択：Shift + v
+カーソル位置の行をヤンク:yy
+カーソル位置の行からn行目までをヤンク：ynG
+最初の行をヤンク：ygg
+最後の行をヤンク：yG
+指定の文字数分ヤンク：{number}yl
+単語のヤンク：yiw
 カーソル位置の後ろにペースト：p
 直前の操作を取り消し：u
-行を削除：dd
-カーソル位置の文字を削除：select⇒x
-Back space:dh
+カーソル位置の行を削除：dd
+カーソル位置の行を削除してインサートモード：CC
+カーソル位置の行からn行目までをヤンク：dnG
 Delete:dl
-２行上削除：dk
+指定の文字数分削除：{number}dl
+カーソル位置から行末まで削除：D
+カーソル位置から行末まで削除してインサートモード：C
+Back space:dh
+
+短形選択モードでインデントを上げ下げする：
+１）Shift+v
+２）行選択（J or K）
+３）上げる場合は>
+　　下げる場合は<
 
 ◆移動系
 行頭へ：0
@@ -54,35 +52,75 @@ Delete:dl
 右へ：l
 上へ：k
 下へ：j
-指定の行(53行目）へ移動：53G	
+指定の行(53行目）へ移動：53G
 ファイルの先頭に移動：gg
 単語の終端に移動：e
 ファイルの末尾に移動：G
-
+f:その行の順方向に一文字検索
+F:その行の逆方向に一文字検索
+t:その行の順方向に一文字検索(カーソルは文字の手前)
+T:その行の逆方向に一文字検索(カーソルは文字の手前)
+ctrl+u:半画面分 上へ
+ctrl+d:半画面分 下へ
+zt:先頭行に合わせる
+zb:最下行に合わせる
 
 ◆検索・置換
-置換mode:insert
 前方検索：/pattrn
 後方検索：?pattrn
+検索結果のハイライトを消去する：:noh
 カーソル位置の単語を検索して移動する：*n
 指定の行の指定の文字ないし文字列を置換する：<開始行番号>,<終了行番号>s/<置換前>/置換後/g
 例）122行目のTest2をTest3に置換したい場合
 :122s/2/3/g
 
+ファイル全体で確認をしながら置換
+:%s/置換前/置換後/gc
+例）以下の選択ができる
+y:置換する
+n:置換しない
+q(Esc):置換モード終了
+a:現在のマッチとそれ以降の結果を全て置換する
+
+◆タブ操作
+タブの新規作成：:tabnew
+次のタブに移動：gt
+複数のファイルをタブで開く：vim -p file1.txt file2.txt 
+現在のタブを閉じる：:tabclose
+タブを破棄して閉じる：:tabclose!
+
+◆ターミナル
+ターミナルを開く：:terminal
+
+◆分割された画面
+カーソルを1つ下のwindowに移動：<Ctrl+w>j
+カーソルを1つ上のwindowに移動：<Ctrl+w>k
+現在のwindowを画面の一番下に移動する：<Ctrl+w>J
+現在のwindowを画面の一番上に移動する：<Ctrl+w>K
+現在のwindowの縦幅を広げる：<Ctrl+w>+
+
+◆レジスタ
+レジスタの内容を表示：:registers
+レジスタからテキストをペースト："レジスタ名p
+指定のレジスタにヤンク："レジスタ名y
+
 ◆ファイル操作
-直前の操作を取り消し：u
+直前の操作を取り消し(アンドゥ)：u
+戻る（リドゥ）:ctrl+r
 保存：:w
 終了：:q
 保存して終了：:wq
 
-◆モード切り替えやsetコマンド
+◆モード切り替え
 ビジュアルモード：v
-インサートモード：i
-行番号表示：:set number
-
+インサート位置からモード：i
+行末に移動しインサートモード：A
+行頭に移動しインサートモード：I
+ノーマルモード：ctrl + [
 
 ◆vimrcでの設定項目
 set number
+set hlsearch
 set cursorline
 set guioptions-=m
 syntax on
@@ -97,8 +135,6 @@ inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-" インサートモードでjjを押すとEscにマップ
-inoremap jj <Esc>
 " バックアップファイルを作成しない
 set nobackup
 set noswapfile
@@ -110,3 +146,6 @@ set belloff=all
 set shortmess-=S
 " クリップモードとヤンク
 set clipboard+=unnamedplus,unnamed
+" フォントとサイズ
+set guifont=Consolas:h20
+
