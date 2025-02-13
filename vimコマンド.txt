@@ -16,8 +16,6 @@ set smartcase " 検索パターンに大文字を含んでいたら大文字小�
 set hlsearch " 検索結果をハイライト
 " 検索結果がファイル末尾まで進んだら、ファイルっ先頭から再び検索
 set wrapscan
-" インサートモードからCtrl+iでノーマルモードに戻る設定
-inoremap <C-j> <Esc>
 " バックアップファイルを作成しない
 set nobackup
 set noswapfile
