@@ -37,6 +37,9 @@ typedef struct ow2_list_ {
 list ListCreate();
 list ListAppend(list,string);
 acc_node LNCreate(string);
+boolean is_Centinel(acc_node);
+boolean LNIs_Null(acc_node);
+void LNAppend(acc_node,acc_node);
 
 //関数の実体
 /* function to create a oneway list */
@@ -54,11 +57,24 @@ acc_node LNCreate(string w){
     an->next = CENTINEL;
     return an;
 }
+boolean is_Centinel(acc_node an){
+    return (an == CENTINEL) ? YES : NO;
+}
+boolean LNIs_Null(acc_node an){
+    return is_Centinel(an);
+}
+void LNAppend(acc_node e,acc_node a){
+    e->next = a;
+}
 /*function to put the node after the tail of the list*/
 list ListAppend(list l,string moji){
     acc_node t = LNCreate(moji);
     if (l == NULL_LIST){
         printf("List is never allocated");
+    }else if(LNIs_Null(l->head)==YES){
+        l->head=l->tail=t;
+    }else{
+        LNAppend(l->tail,t);
     }
     return l;
 }
