@@ -42,6 +42,10 @@ int main(){
     sort_key sKey;
     sKey = BY_FREQ;
     list wordlist = ListCreate();
+    int mojisize = sizeof(moji) /sizeof(moji[0]);
+    for (int i = 0;i < mojisize ;i++){
+        printf("%s",moji[i]);
+    }
     printf("no problem");
     return 0;
 }
