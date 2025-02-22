@@ -7,7 +7,7 @@ CFLAGS = -Wall -ILib
 HEAP_DIR = heap
 #INPUT_DIR = input_device
 #STM_DIR = stm
-SOURCES_DIR = source
+SOURCES_DIR = sources
 
 
 # ソースファイルとオブジェクトファイルの設定
