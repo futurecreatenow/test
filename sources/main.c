@@ -19,7 +19,7 @@ typedef enum {BY_STRING,BY_FREQ} sort_key;
 typedef struct node_ *acc_node;
 struct node_ {
     //item_type d;
-    string w;
+    char* w;
     int count;
     acc_node next;
     //acc_node prev;
@@ -123,7 +123,7 @@ void ListPrint(list l){
 
 acc_node t_createNode(const char* w,int count){
     acc_node newNode=(acc_node)malloc(sizeof(node));
-    strcpy(newNode->w,w);
+    newNode->w = strdup(w);
     newNode->count=count;
     newNode->next = NULL;
     return newNode;
@@ -160,20 +160,17 @@ int main(){
     //printf("-----------------\n");
     ////ListPrint(wordlist);
     
-    /*以下はオリジナルのリスト構造である*/
-    printf("-----------------\n");
+    /*以下はオリジナルのリスト構造である
+    オリジナル関数の接頭語はt_である*/
     list myList=(list)malloc(sizeof(list_body));
     myList->head=NULL;
     myList->tail=NULL;
     //int mojisize = sizeof(moji) /sizeof(moji[0]);
     const char* words[] = {"one","two","three"};
-    printf("-----------------\n");
     int wordCount = sizeof(words) /sizeof(words[0]);
     for (int i = 0;i < wordCount ;i++){
-    printf("-----------------\n");
         t_addNode(myList,words[i],1);
     }
-    printf("-----------------\n");
     t_printList(myList);
     free(myList);
     return 0;
