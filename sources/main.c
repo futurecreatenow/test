@@ -35,29 +35,29 @@ typedef struct ow2_list_ {
 
 //関数のプロトタイプ宣言
 list ListCreate();
-list ListAppend(list,string);
-acc_node LNCreate(string);
+list ListAppend(list,const char*);
+acc_node LNCreate(const char*);
 boolean is_Centinel(acc_node);
 boolean LNIs_Null(acc_node);
 void LNAppend(acc_node,acc_node);
 void ListPrint(list);
 boolean ListIs_Null(list);
 acc_node LNNext(acc_node);
-string LNData_Ref(acc_node);
+const char* LNData_Ref(acc_node);
 acc_node t_createNode(const char*,int);
 void t_addNode(list,const char*,int);
 void t_printList(list);
 //関数の実体
 /* function to create a oneway list */
 list ListCreate() {
-   list l;
-   l = (list) HPAlloc(HPCreate(), sizeof(list_body));
-   l->head = l->tail = CENTINEL;
-   return l;
+    list l;
+    l = (list) HPAlloc(HPCreate(), sizeof(list_body));
+    l->head = l->tail = CENTINEL;
+    return l;
 }
 
 /*リスト先のポインタを指定せず値のみ格納した構造体*/
-acc_node LNCreate(string w){
+acc_node LNCreate(const char* w){
     acc_node an;
     an = (acc_node) HPAlloc(HPCreate(),sizeof(node));
     strcpy(an->w,w);
@@ -79,7 +79,7 @@ void LNAppend(acc_node e,acc_node a){
 }
 
 /*function to put the node after the tail of the list*/
-list ListAppend(list l,string moji){
+list ListAppend(list l, const char* moji){
     acc_node t = LNCreate(moji);
     if (l == NULL_LIST){
         printf("List is never allocated");
@@ -105,7 +105,7 @@ acc_node LNNext(acc_node an){
     else return an->next;
 }
 
-string LNData_Ref(acc_node an){ return an->w; }
+const char* LNData_Ref(acc_node an){ return an->w; }
 
 void ListPrint(list l){
     acc_node n;
@@ -151,27 +151,27 @@ void t_printList(list l){
 int main(){
     ////sort_key sKey;
     ////sKey = BY_FREQ;
-    //list wordlist = ListCreate();
-    //int mojisize = sizeof(moji) /sizeof(moji[0]);
-    //for (int i = 0;i < mojisize ;i++){
-    //    printf("moji >> %s\n",moji[i]);
-    //    wordlist = ListAppend(wordlist,moji[i]);
-    //}
-    //printf("-----------------\n");
-    ////ListPrint(wordlist);
+    list wordlist = ListCreate();
+    const char* moji[] = {"one","two","three"};
+    int mojisize = sizeof(moji) /sizeof(moji[0]);
+    for (int i = 0;i < mojisize ;i++){
+        printf("moji >> %s\n",moji[i]);
+        wordlist = ListAppend(wordlist,moji[i]);
+    }
+    printf("-----------------\n");
+    ListPrint(wordlist);
     
     /*以下はオリジナルのリスト構造である
     オリジナル関数の接頭語はt_である*/
-    list myList=(list)malloc(sizeof(list_body));
-    myList->head=NULL;
-    myList->tail=NULL;
-    //int mojisize = sizeof(moji) /sizeof(moji[0]);
-    const char* words[] = {"one","two","three"};
-    int wordCount = sizeof(words) /sizeof(words[0]);
-    for (int i = 0;i < wordCount ;i++){
-        t_addNode(myList,words[i],1);
-    }
-    t_printList(myList);
-    free(myList);
+    //list myList=(list)malloc(sizeof(list_body));
+    //myList->head=NULL;
+    //myList->tail=NULL;
+    //const char* words[] = {"one","two","three"};
+    //int wordCount = sizeof(words) /sizeof(words[0]);
+    //for (int i = 0;i < wordCount ;i++){
+    //    t_addNode(myList,words[i],1);
+    //}
+    //t_printList(myList);
+    //free(myList);
     return 0;
 }
