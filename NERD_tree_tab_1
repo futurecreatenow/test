@@ -1,0 +1,33 @@
+" Press ? for help
+
+.. (up a dir)
+/Users/teradatakayuki/
+▾ Desktop/
+  ▾ CSRA/
+    ▸ store/
+    ▾ test/
+      ▸ list_sources/
+      ▸ list_spec/
+      ▸ list_types/
+      ▸ mydef/
+      ▸ node/
+      ▸ two_way/
+        Makefile
+        memo.txt
+        test.c
+        vim_use.txt
+        vimコマンド.txt
+    ▸ test-old/
+  ▸ OneDrive/ -> /Users/teradatakayuki/Library/CloudStorage/OneDrive-個人用/
+  ▸ pythoncode/
+  ▸ Visual Studio Code-3.app/
+  ▸ 保存用/
+    ~$ferences.docx
+▸ Documents/
+▸ Downloads/
+▸ Library/
+▸ Movies/
+▸ Music/
+▸ one drive/
+▸ Pictures/
+▸ Public/
