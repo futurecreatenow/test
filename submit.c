@@ -12,14 +12,24 @@ int memberOf(ARRAY s, int i) {
 
 // Append of array
 void put(ARRAY *s, int i) {
-    if (s->numOfElts < MAX_ARRAY_ELE && !memberOf(*s, i)) {
+    if (s->numOfElts >= MAX_ARRAY_ELE) {
+        printf("Array limit reached: Skipped: %d\n", i);
+        return;
+    }
+    if (!memberOf(*s, i)) {
         s->elements[s->numOfElts++] = i;
+    } else {
+        printf("Skipped: %d\n", i);
     }
 }
 
 // Calculation of union set
 ARRAY unionSet(ARRAY first, ARRAY second) {
-    ARRAY result = {{UNION_INIT_ELE}, UNION_INIT_NUM};
+    ARRAY result = {{0}, 0};
+    result.numOfElts = 0;  // 要素数をゼロにリセット
+    for (int i = 0; i < MAX_ARRAY_ELE; ++i) {
+        result.elements[i] = 0;  // 配列をゼロ初期化
+    }
     for (int i = 0; i < first.numOfElts; ++i) put(&result, first.elements[i]);
     for (int i = 0; i < second.numOfElts; ++i) put(&result, second.elements[i]);
     return result;
@@ -27,7 +37,7 @@ ARRAY unionSet(ARRAY first, ARRAY second) {
 
 // Calculation of intersection set
 ARRAY intersectionSet(ARRAY first, ARRAY second) {
-    ARRAY result = {{INTER_INIT_ELE}, INTER_INIT_NUM};
+    ARRAY result = {{0}, 0};
     for (int i = 0; i < first.numOfElts; ++i) {
         if (memberOf(second, first.elements[i])) put(&result, first.elements[i]);
     }
@@ -43,10 +53,10 @@ void printSet(ARRAY s) {
 
 // Initialization of array
 ARRAY generateRandomSet() {
-    ARRAY s = {{ARRAY_INIT_ELE}, ARRAY_INIT_NUM};
+    ARRAY s = {{0}, 0};
     int count = rand() % (MAX_ARRAY_ELE - MIN_ARRAY_ELE + 1) + MIN_ARRAY_ELE; 
     while (s.numOfElts < count) {
-        int value = rand() % (MAX_ARRAY_NUM - MIN_ARRAY_NUM + 1) + MIN_ARRAY_NUM; 
+        int value = rand() % (MAX_ARRAY_NUM - MIN_ARRAY_NUM + 1) + MIN_ARRAY_NUM;
         put(&s, value);
     }
     return s;
