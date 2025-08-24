@@ -1,0 +1,17 @@
+//理解
+構造体のメンバ変数であるint noMembersの初期値は0である。
+is_Member_Of関数内のfor文についてSetAddの最初の要素は必ず配列にappendされる。
+
+//疑問
+・scanningPositionとnoMembersの関係性は？？
+一見あまり関連性がなさそうではある。
+
+・noMembersのインクリメント条件は？？
+　SetAdd関数において配列内に入力された整数値が存在しない時
+
+・noMembersのデクリメント条件は？？
+　SetRemove関数内でデクリメントされる。
+　しかし、現在のスクリプトにおいてはSetRemove関数は使用されない。
+
+・SetScanning関数：
+　
