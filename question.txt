@@ -3,15 +3,12 @@
 is_Member_Of関数内のfor文についてSetAddの最初の要素は必ず配列にappendされる。
 
 //疑問
-・scanningPositionとnoMembersの関係性は？？
-一見あまり関連性がなさそうではある。
+・scanningPositionとnoMembersの関係性
+　・noMembersは最終的には配列の要素数
+　・scanningPositionは配列の読み取り位置のインデックス
 
-・noMembersのインクリメント条件は？？
-　SetAdd関数において配列内に入力された整数値が存在しない時
+・例えば、SetAdd関数内で構造体setをsetとacc_setで使い分けている
+　それを使い分けるタイミングがいまいち理解できない。
 
-・noMembersのデクリメント条件は？？
-　SetRemove関数内でデクリメントされる。
-　しかし、現在のスクリプトにおいてはSetRemove関数は使用されない。
-
-・SetScanning関数：
-　
+・HPAlloc関数でヒープ領域を確保したが、
+　確保されたメモリの解放処理を行っていない気がする。
