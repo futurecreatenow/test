@@ -1,47 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "Btree_ds.h"
+#include "Btree.h"
 
-#define T 3
-#define MAX_KEYS (2*T - 1)
-#define MAX_CHILD (2*T)
-
-typedef struct BNode BNode;
-typedef struct BTree BTree;
-
-struct BNode {
-    int n;//ノード内に格納されている単語の数
-    char *keys[MAX_KEYS];//ノードが保持する単語を格納する配列
-    int freq[MAX_KEYS];//単語の出現回数
-    BNode *child[MAX_CHILD];//子ノードへのポインタ配列。leafnodeはNULL
-    int leaf;//0⇒葉ノード以外。1⇒葉ノード
-    void (*split_child)(BNode *self, int i);//子ノードが満杯時にノードを分割する。
-    //ノードが満杯出ない場合のinsert。葉ならそのままinsert、内部ノードなら適切な子へinsert
-    void (*insert_nonfull)(BNode *self, const char *word);
-    //単語と頻度の表示
-    void (*traverse)(BNode *self);
-};
-
-struct BTree {
-    //B木の根ノード。挿入時に根が満杯なら分割して高さが1つ増える。
-    BNode *root;
-
-    //木全体への挿入処理。
-    void (*insert)(BTree *self, const char *word);
-    //単語の頻度の表示
-    void (*traverse)(BTree *self);
-};
-
-BNode* BNode_create(int leaf);
-BTree* BTree_create();
-
-static int search_key(BNode *x, const char *word) {
+int search_key(BNode *x, const char *word) {
     int i = 0;
     while (i < x->n && strcmp(word, x->keys[i]) > 0) i++;
     return i;
 }
 
-static void BNode_split_child(BNode *x, int i) {
+void BNode_split_child(BNode *x, int i) {
     BNode *y = x->child[i];
     BNode *z = BNode_create(y->leaf);
 
@@ -74,7 +43,7 @@ static void BNode_split_child(BNode *x, int i) {
     x->n++;
 }
 
-static void BNode_insert_nonfull(BNode *x, const char *word) {
+void BNode_insert_nonfull(BNode *x, const char *word) {
     int i = x->n - 1;
 
     if (x->leaf) {
@@ -110,7 +79,7 @@ static void BNode_insert_nonfull(BNode *x, const char *word) {
     }
 }
 
-static void BNode_traverse(BNode *x) {
+void BNode_traverse(BNode *x) {
     for (int i = 0; i < x->n; i++) {
         if (!x->leaf) x->child[i]->traverse(x->child[i]);
         printf("%s : %d\n", x->keys[i], x->freq[i]);
@@ -133,7 +102,7 @@ BNode* BNode_create(int leaf) {
     return node;
 }
 
-static void BTree_insert(BTree *tree, const char *word) {
+void BTree_insert(BTree *tree, const char *word) {
     BNode *r = tree->root;
 
     int pos = search_key(r, word);
@@ -153,7 +122,7 @@ static void BTree_insert(BTree *tree, const char *word) {
     }
 }
 
-static void BTree_traverse(BTree *tree) {
+void BTree_traverse(BTree *tree) {
     tree->root->traverse(tree->root);
 }
 
