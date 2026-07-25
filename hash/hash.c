@@ -1,28 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-typedef struct HashNode {
-    char *word;
-    int count;
-    struct HashNode *next;
-} HashNode;
-
-typedef struct HashTable {
-    int size;
-    HashNode **buckets;
-    void (*insert)(struct HashTable *self, const char *word);
-    HashNode* (*find)(struct HashTable *self, const char *word);
-    void (*print)(struct HashTable *self);
-    void (*destroy)(struct HashTable *self);
-} HashTable;
-
-unsigned long hash(const char *str);
-HashTable* new(int size);
-HashNode* find(HashTable *self, const char *word);
-void insert(HashTable *self, const char *word);
-void print_fri(HashTable *self);
-void destroy(HashTable *self);
+#include "hash_ds.h"
+#include "hash.h"
 
 unsigned long hash(const char *str) {
     unsigned long h = 5381;
