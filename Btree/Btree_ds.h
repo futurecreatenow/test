@@ -24,8 +24,6 @@ typedef struct BTree {
 
     //木全体への挿入処理。
     void (*insert)(struct BTree *self, const char *word);
-    //単語の頻度の表示
-    void (*traverse)(struct BTree *self);
 }BTree;
 
 #endif

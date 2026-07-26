@@ -8,7 +8,8 @@ extern void BNode_insert_nonfull(BNode *x, const char *word);
 extern void BNode_traverse(BNode *x);
 extern BNode* BNode_create(int leaf);
 extern void BTree_insert(BTree *tree, const char *word);
-extern void BTree_traverse(BTree *tree);
 extern BTree* BTree_create();
+extern void BNode_free(BNode *node);
+extern void BTree_free(BTree *tree);
 
 #endif
