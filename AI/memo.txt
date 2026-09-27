@@ -1,0 +1,32 @@
+目的：9/9に配布された資料の読解・理解をする。
+
+
+A）y処理系抽象構文木ならびに記号表の設計
+ファイル：
+"C:\myfolder\03_job\2_勉強会\03_20260909\PathExpression\PathExpression\Design&Implementation\doc\PDF\y_AST_Symbol_Table_Design_20260908.pdf"
+
+知識：
+・AST（Abstract Syntax Tree）：抽象構文木
+・Symbol Table：記号表
+
+理解：
+・処理系の位置づけは下記となる。
+・y原子プログラム⇒字句構文解析⇒AST記号表⇒SIR
+
+B）yC実行環境のPOSIX Threadsを使った実現の詳細
+ファイル：
+"C:\myfolder\03_job\2_勉強会\03_20260909\PathExpression\PathExpression\Design&Implementation\doc\PDF\y_C_POSIX_Threads_Implementation_Details_20260904.pdf"
+
+知識：
+・SIR：Serialized Internal Representation：直列化内部表現
+⇒Cプログラムの中間表現をXMLやバイナリ形式で保存できるようにしたもの。
+⇒外部ファイルとして保存・再利用できるようにした拡張。
+・generated framework：生成型枠
+・platform code：基盤コード
+・application programmer：応用プログラマ
+・RCB：Runtime Control Block
+・NFA：Nondeterministic Finite-state Automaton：非決定性有限オートマトン
+⇒「ある入力に対して複数の遷移先を持つことが許される有限状態機械」
+
+理解：
+・
